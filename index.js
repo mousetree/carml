@@ -14,7 +14,7 @@ const ml = google.ml({
 authClient.scopes = ["https://www.googleapis.com/auth/cloud-platform"];
 authClient.authorize();
 
-const MODEL = "projects/cardamageautomldemo/models/car_damage_v20180724123611";
+const MODEL = "projects/cardamageautomldemo/models/car_damage";
 
 const app = express();
 app.use(bodyParser.json({ limit: "50mb" }));
