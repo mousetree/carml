@@ -10,10 +10,11 @@
 <body>
 
     <h1>CarML</h1>
+    <p>Take a photo to access your car's damage</p>
 
     <div class="box">
         <input type="file" name="file-5[]" id="file-5" class="inputfile inputfile-4" data-multiple-caption="{count} files selected"
-            multiple />
+        />
         <label for="file-5">
             <figure>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -24,21 +25,51 @@
                                 fill="#FFFFFF" />
                         </g>
                     </g>
-
                 </svg>
-
             </figure>
-            <span>Take a photo&hellip;</span>
+
+
         </label>
+        <p id="result">No result</div>
     </div>
 
     <script>
-        const fileInput = document.getElementById('file-input');
+
+        const fileInput = document.getElementById('file-5');
         fileInput.addEventListener('change', (e) => doSomethingWithFiles(e.target.files));
+        setMessage();
 
         function doSomethingWithFiles(files) {
-            console.log(files);
+            const file = files[0]
+            if (!file) console.error('No file selected')
+            getBase64(file)
+                .then(applyModel)
+                .then(result => {
+                    setMessage(result.status)
+                })
         }
+
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        function applyModel(content) {
+            console.log('applying model', content)
+            setMessage('Learning...')
+            return new Promise((resolve, reject) => {
+                setTimeout(() => resolve({ status: 'No damage detected' }), 1000)
+            })
+        }
+
+        function setMessage(text = '') {
+            document.getElementById('result').innerHTML = text
+        }
+
     </script>
 
 </body>
