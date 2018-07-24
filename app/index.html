@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>CarML</title>
+    <title>CarML v0.1</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -42,6 +42,7 @@
         setMessage();
 
         function doSomethingWithFiles(files) {
+            setMessage()
             const file = files[0]
             if (!file) {
                 console.error('No file selected')
@@ -65,13 +66,18 @@
         }
 
         function applyModel(content) {
-
-            setMessage('Learning...')
-            const data = { payload: { image: { imageBytes: content } } }
-            console.log('applying model', data)
-            return new Promise((resolve, reject) => {
-                setTimeout(() => resolve({ status: 'No damage detected' }), 1000)
+            setMessage('Analyzing photo...')
+            const data = { content }
+            const url = '/api/process'
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(data)
             })
+                .then(response => response.json())
+                .catch(error => console.error(error))
         }
 
         function setMessage(text = '') {
