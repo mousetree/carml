@@ -41,12 +41,16 @@
 
         function doSomethingWithFiles(files) {
             const file = files[0]
-            if (!file) console.error('No file selected')
+            if (!file) {
+                console.error('No file selected')
+                return
+            }
             getBase64(file)
                 .then(applyModel)
                 .then(result => {
                     setMessage(result.status)
                 })
+                .catch(error => setMessage('Ooops, something went wrong'))
         }
 
         function getBase64(file) {
