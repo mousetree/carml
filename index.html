@@ -32,7 +32,7 @@
 
 
         </label>
-        <p id="result">No result</div>
+        <p id="result"></p>
     </div>
 
     <script>
@@ -65,8 +65,10 @@
         }
 
         function applyModel(content) {
-            console.log('applying model', content)
+
             setMessage('Learning...')
+            const data = { payload: { image: { imageBytes: content } } }
+            console.log('applying model', data)
             return new Promise((resolve, reject) => {
                 setTimeout(() => resolve({ status: 'No damage detected' }), 1000)
             })

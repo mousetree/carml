@@ -14,6 +14,10 @@ p {
   font-size: 1.5em;
 }
 
+p#result {
+  font-size: 4em;
+}
+
 .inputfile {
   width: 0.1px;
   height: 0.1px;
