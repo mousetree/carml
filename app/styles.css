@@ -1,5 +1,5 @@
 body {
-  background-color: #4392f1;
+  background-color: #0d2446;
   color: #fff;
   font-family: "Roboto", sans-serif;
   text-align: center;
@@ -90,7 +90,7 @@ p#result {
   width: 20em;
   height: 20em;
   border-radius: 50%;
-  background-color: #d3394c;
+  background-color: #fff;
   display: block;
   padding: 100px;
   margin: 0 auto 10px;
