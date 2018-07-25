@@ -32,6 +32,7 @@
 
 
         </label>
+        <div id="car"></div>
         <p id="result"></p>
     </div>
 
@@ -51,7 +52,8 @@
             getBase64(file)
                 .then(applyModel)
                 .then(result => {
-                    setMessage(result.status)
+                    setMessage(result.name || result.status)
+
                 })
                 .catch(error => setMessage('Ooops, something went wrong'))
         }
@@ -60,7 +62,10 @@
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
+                reader.onload = (e) => {
+                    document.getElementById('car').innerHTML = ['<img src="', e.target.result, '" title="', file.name, '" width="600" />'].join('');
+                    resolve(reader.result)
+                };
                 reader.onerror = error => reject(error);
             });
         }
