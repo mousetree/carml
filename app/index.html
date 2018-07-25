@@ -73,7 +73,7 @@
         function applyModel(content) {
             setMessage('Analyzing photo...')
             const data = { content }
-            const url = '/api/process'
+            const url = 'http://52.208.90.45:5000/'
             return fetch(url, {
                 method: 'POST',
                 headers: {
